@@ -1,0 +1,269 @@
+@import "tailwindcss";
+@config "../tailwind.config.ts";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@theme {
+  --color-ocean-deep: #005F73;
+  --color-ocean-sky: #21C7B7;
+  --color-ocean-light: #94D2BD;
+  --color-accent-orange: #EE9B00;
+  --color-accent-orangeHover: #CA7C00;
+  --color-neutral-beige: #E9D8A6;
+  --color-neutral-white: #FFFFFF;
+  --color-neutral-lightGray: #F5F6F7;
+  --color-neutral-darkBlue: #222222;
+  --color-neutral-gray: #6c757d;
+  --color-neutral-footer: #001219;
+  
+  --color-primary-blue: #21C7B7;
+  --color-primary-indigo: #005F73;
+  --color-primary-purple: #6f42c1;
+  --color-accent-pink: #d63384;
+  
+  --color-status-success: #198754;
+  --color-status-danger: #dc3545;
+  --color-status-warning: #ffc107;
+  --color-status-info: #21C7B7;
+  
+  --color-neutral-light: #F5F6F7;
+  --color-neutral-dark-gray: #222222;
+  --color-neutral-dark: #222222;
+}
+
+/* Design System Color Palette */
+:root {
+  /* Primary Colors */
+  --primary-blue: #21C7B7;
+  --primary-indigo: #005F73;
+  --primary-purple: #6f42c1;
+  
+  /* Accent Colors */
+  --accent-pink: #d63384;
+  --accent-orange: #EE9B00;
+  --accent-yellow: #ffc107;
+  --accent-cyan: #21C7B7;
+  
+  /* Status Colors */
+  --status-success: #198754;
+  --status-danger: #dc3545;
+  --status-warning: #ffc107;
+  --status-info: #21C7B7;
+  
+  /* Neutral Colors */
+  --neutral-white: #ffffff;
+  --neutral-light: #F5F6F7;
+  --neutral-gray: #6c757d;
+  --neutral-dark-gray: #222222;
+  --neutral-dark: #222222;
+}
+
+/* Button Styles */
+.btn-primary {
+  @apply text-white px-6 py-3 rounded-lg font-semibold transition duration-300;
+  background-color: var(--primary-blue);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-indigo);
+}
+
+.btn-secondary {
+  @apply px-6 py-3 rounded-lg font-semibold transition duration-300;
+  background-color: var(--neutral-light);
+  color: var(--neutral-dark);
+}
+
+.btn-secondary:hover {
+  background-color: var(--neutral-gray);
+  color: var(--neutral-white);
+}
+
+.btn-danger {
+  @apply text-white px-6 py-3 rounded-lg font-semibold transition duration-300;
+  background-color: var(--status-danger);
+}
+
+.btn-danger:hover {
+  opacity: 0.9;
+}
+
+.btn-success {
+  @apply text-white px-6 py-3 rounded-lg font-semibold transition duration-300;
+  background-color: var(--status-success);
+}
+
+.btn-success:hover {
+  opacity: 0.9;
+}
+
+/* Card Styles */
+.card {
+  @apply bg-white rounded-2xl shadow-lg p-6 hover:shadow-xl transition duration-300;
+}
+
+/* Input Styles */
+input,
+textarea,
+select {
+  @apply w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-transparent transition;
+  border-color: #dee2e6;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Label Styles */
+label {
+  @apply block text-gray-900 font-semibold mb-2;
+}
+
+/* Typography */
+h1 {
+  @apply text-4xl md:text-5xl font-bold text-gray-900;
+}
+
+h2 {
+  @apply text-3xl md:text-4xl font-bold text-gray-900;
+}
+
+h3 {
+  @apply text-2xl md:text-3xl font-bold text-gray-900;
+}
+
+h4 {
+  @apply text-xl md:text-2xl font-semibold text-gray-900;
+}
+
+p {
+  @apply text-gray-600 leading-relaxed;
+}
+
+/* Spacing Utilities */
+.section-padding {
+  @apply py-16 px-6;
+}
+
+.container-max {
+  @apply max-w-7xl mx-auto;
+}
+
+.section-gap {
+  @apply mb-16;
+}
+
+/* Grid System */
+.grid-responsive {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6;
+}
+
+.grid-responsive-2 {
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+}
+
+.grid-responsive-3 {
+  @apply grid grid-cols-1 md:grid-cols-2 gap-6;
+}
+
+/* Status Utilities */
+.status-success {
+  color: var(--status-success);
+}
+
+.status-danger {
+  color: var(--status-danger);
+}
+
+.status-warning {
+  color: var(--status-warning);
+}
+
+.status-info {
+  color: var(--status-info);
+}
+
+.bg-status-success {
+  background-color: var(--status-success);
+}
+
+.bg-status-danger {
+  background-color: var(--status-danger);
+}
+
+.bg-status-warning {
+  background-color: var(--status-warning);
+}
+
+.bg-status-info {
+  background-color: var(--status-info);
+}
+
+/* Neutral Utilities */
+.text-neutral-light {
+  color: var(--neutral-light);
+}
+
+.text-neutral-gray {
+  color: var(--neutral-gray);
+}
+
+.text-neutral-dark-gray {
+  color: var(--neutral-dark-gray);
+}
+
+.text-neutral-dark {
+  color: var(--neutral-dark);
+}
+
+.bg-neutral-light {
+  background-color: var(--neutral-light);
+}
+
+.bg-neutral-dark {
+  background-color: var(--neutral-dark);
+}
+
+/* Primary Utilities */
+.text-primary-blue {
+  color: var(--primary-blue);
+}
+
+.text-primary-indigo {
+  color: var(--primary-indigo);
+}
+
+.text-primary-purple {
+  color: var(--primary-purple);
+}
+
+.bg-primary-blue {
+  background-color: var(--primary-blue);
+}
+
+.bg-primary-indigo {
+  background-color: var(--primary-indigo);
+}
+
+.bg-primary-purple {
+  background-color: var(--primary-purple);
+}
