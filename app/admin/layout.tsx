@@ -90,7 +90,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <div className="flex items-center gap-3">
             <AdminPanelSettingsIcon className="text-ocean-sky text-xl" />
             <span className="text-sm font-bold text-neutral-dark">Control Panel</span>
-            <span className="text-gray-300">|</span>
+            <span className="text-neutral-light">|</span>
             <span className="text-[11px] text-ocean-deep bg-ocean-sky/10 px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">
               Production Mode
             </span>

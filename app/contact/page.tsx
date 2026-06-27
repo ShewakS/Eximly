@@ -2,6 +2,12 @@
 
 import { useState, FormEvent, ChangeEvent } from 'react';
 
+// Material UI Icons
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
@@ -10,6 +16,7 @@ export default function ContactPage() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -21,72 +28,152 @@ export default function ContactPage() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError('');
 
     try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || 'Failed to send message. Please try again.');
+        return;
+      }
+
       setSubmitted(true);
       setFormData({ name: '', email: '', message: '' });
 
-      // Reset message after 5 seconds
-      setTimeout(() => setSubmitted(false), 5000);
-    } catch (error) {
-      console.error('Error submitting form:', error);
+      // Reset success message after 6 seconds
+      setTimeout(() => setSubmitted(false), 6000);
+    } catch (err) {
+      setError('An unexpected error occurred. Please try again.');
     } finally {
       setLoading(false);
     }
   };
 
-  return (
-    <div className="min-h-screen bg-neutral-lightGray px-6 py-8">
-      <div className="max-w-7xl mx-auto">
-        <h1 className="text-5xl font-bold mb-8 text-center text-neutral-dark">Contact Us</h1>
-        <p className="text-xl text-center text-neutral-gray mb-12">
-          Have questions? We'd love to hear from you. Get in touch with us!
+  const infoCards = [
+    {
+      icon: <EmailIcon className="text-ocean-sky" />,
+      title: 'Email',
+      content: (
+        <a href="mailto:info@eximly.com" className="text-ocean-sky hover:underline font-medium">
+          info@eximly.com
+        </a>
+      ),
+    },
+    {
+      icon: <PhoneIcon className="text-ocean-sky" />,
+      title: 'Phone',
+      content: (
+        <a href="tel:+18008349598" className="text-ocean-sky hover:underline font-medium">
+          +1-800-EXIMLY (839-6459)
+        </a>
+      ),
+    },
+    {
+      icon: <AccessTimeIcon className="text-ocean-sky" />,
+      title: 'Business Hours',
+      content: (
+        <p className="text-neutral-gray text-sm leading-relaxed">
+          Mon – Fri: 9:00 AM – 6:00 PM EST<br />
+          Saturday: 10:00 AM – 4:00 PM EST<br />
+          Sunday: Closed
         </p>
+      ),
+    },
+    {
+      icon: <LocationOnIcon className="text-ocean-sky" />,
+      title: 'Address',
+      content: (
+        <p className="text-neutral-gray text-sm leading-relaxed">
+          Eximly HQ<br />
+          123 Logistics Drive<br />
+          San Francisco, CA 94105<br />
+          United States
+        </p>
+      ),
+    },
+  ];
 
-        <div className="grid-responsive-3">
-          {/* Contact Form */}
-          <div className="card">
-            <h2 className="text-2xl font-bold mb-6 text-neutral-dark">Send us a message</h2>
+  return (
+    <div className="min-h-screen bg-neutral-lightGray px-6 py-12">
+      <div className="container-max">
+        {/* Page Header */}
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <span className="text-ocean-sky font-bold tracking-wider text-xs uppercase mb-2 block">
+            GET IN TOUCH
+          </span>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-neutral-darkBlue mb-4">
+            Contact Us
+          </h1>
+          <p className="text-neutral-gray text-base leading-relaxed">
+            Have questions or need assistance? We'd love to hear from you.
+            Our team is ready to help.
+          </p>
+        </div>
+
+        {/* Two-column layout: Form + Info cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+
+          {/* Contact Form — max width constrained on wide screens */}
+          <div className="card max-w-xl w-full mx-auto lg:mx-0">
+            <h2 className="text-2xl font-bold mb-6 text-neutral-darkBlue">Send us a message</h2>
 
             {submitted && (
-              <div className="bg-status-success bg-opacity-10 border border-status-success text-status-success px-4 py-3 rounded-lg mb-6">
-                ✓ Thank you! We'll get back to you soon.
+              <div className="bg-status-success/10 border border-status-success text-status-success px-4 py-3 rounded-lg mb-6 text-sm font-medium flex items-center gap-2">
+                <span>✓</span>
+                <span>Thank you! We'll get back to you soon.</span>
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            {error && (
+              <div className="bg-status-danger/10 border border-status-danger text-status-danger px-4 py-3 rounded-lg mb-6 text-sm font-medium">
+                {error}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label htmlFor="name">Name</label>
+                <label htmlFor="contact-name" className="block text-sm font-bold text-neutral-darkBlue mb-2">
+                  Full Name
+                </label>
                 <input
-                  id="name"
+                  id="contact-name"
                   name="name"
                   type="text"
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  placeholder="Your name"
+                  placeholder="Your full name"
                 />
               </div>
 
               <div>
-                <label htmlFor="email">Email</label>
+                <label htmlFor="contact-email" className="block text-sm font-bold text-neutral-darkBlue mb-2">
+                  Email Address
+                </label>
                 <input
-                  id="email"
+                  id="contact-email"
                   name="email"
                   type="email"
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  placeholder="your@email.com"
+                  placeholder="you@example.com"
                 />
               </div>
 
               <div>
-                <label htmlFor="message">Message</label>
+                <label htmlFor="contact-message" className="block text-sm font-bold text-neutral-darkBlue mb-2">
+                  Message
+                </label>
                 <textarea
-                  id="message"
+                  id="contact-message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
@@ -99,48 +186,28 @@ export default function ContactPage() {
 
               <button
                 type="submit"
+                id="contact-submit"
                 disabled={loading}
-                className="btn-primary w-full disabled:opacity-50"
+                className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </div>
 
-          {/* Contact Information */}
-          <div>
-            <div className="card mb-6">
-              <h3 className="text-xl font-bold mb-4 text-neutral-dark">Email</h3>
-              <a href="mailto:info@eximly.com" className="text-primary-blue hover:underline text-lg">
-                info@eximly.com
-              </a>
-            </div>
-
-            <div className="card mb-6">
-              <h3 className="text-xl font-bold mb-4 text-neutral-dark">Phone</h3>
-              <a href="tel:+18008349598" className="text-primary-blue hover:underline text-lg">
-                +1-800-EXIMLY (839-6459)
-              </a>
-            </div>
-
-            <div className="card mb-6">
-              <h3 className="text-xl font-bold mb-4 text-neutral-dark">Business Hours</h3>
-              <p className="text-neutral-gray">
-                Monday - Friday: 9:00 AM - 6:00 PM EST<br/>
-                Saturday: 10:00 AM - 4:00 PM EST<br/>
-                Sunday: Closed
-              </p>
-            </div>
-
-            <div className="card">
-              <h3 className="text-xl font-bold mb-4 text-neutral-dark">Address</h3>
-              <p className="text-neutral-gray">
-                Eximly HQ<br/>
-                123 Logistics Drive<br/>
-                San Francisco, CA 94105<br/>
-                United States
-              </p>
-            </div>
+          {/* Contact Info Cards — stacked with space-y-4 (P3: no individual mb-6) */}
+          <div className="space-y-4">
+            {infoCards.map((card) => (
+              <div key={card.title} className="card flex items-start gap-4">
+                <div className="w-10 h-10 rounded-lg bg-ocean-sky/10 flex items-center justify-center flex-shrink-0 mt-1">
+                  {card.icon}
+                </div>
+                <div>
+                  <h3 className="font-bold text-neutral-darkBlue mb-1">{card.title}</h3>
+                  {card.content}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

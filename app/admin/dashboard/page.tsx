@@ -78,7 +78,7 @@ export default function AdminDashboard() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className="bg-gradient-to-br from-ocean-sky to-ocean-deep text-white">
+        <Card className="bg-gradient-to-br from-ocean-sky to-ocean-deep text-white h-full">
           <CardBody>
             <div className="flex items-center justify-between">
               <div>
@@ -91,7 +91,7 @@ export default function AdminDashboard() {
           </CardBody>
         </Card>
 
-        <Card className="bg-gradient-to-br from-ocean-sky to-ocean-deep text-white">
+        <Card className="bg-gradient-to-br from-ocean-sky to-ocean-deep text-white h-full">
           <CardBody>
             <div className="flex items-center justify-between">
               <div>
@@ -104,7 +104,7 @@ export default function AdminDashboard() {
           </CardBody>
         </Card>
 
-        <Card className="bg-gradient-to-br from-ocean-sky to-ocean-deep text-white">
+        <Card className="bg-gradient-to-br from-ocean-sky to-ocean-deep text-white h-full">
           <CardBody>
             <div className="flex items-center justify-between">
               <div>
@@ -117,7 +117,7 @@ export default function AdminDashboard() {
           </CardBody>
         </Card>
 
-        <Card className="bg-gradient-to-br from-ocean-sky to-ocean-deep text-white">
+        <Card className="bg-gradient-to-br from-ocean-sky to-ocean-deep text-white h-full">
           <CardBody>
             <div className="flex items-center justify-between">
               <div>
@@ -133,7 +133,7 @@ export default function AdminDashboard() {
 
       {/* Detailed Stats */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card>
+        <Card className="h-full">
           <CardBody>
             <h3 className="text-xl font-bold text-neutral-darkBlue mb-4">Shipment Status</h3>
             <div className="space-y-3">
@@ -153,7 +153,7 @@ export default function AdminDashboard() {
           </CardBody>
         </Card>
 
-        <Card>
+        <Card className="h-full">
           <CardBody>
             <h3 className="text-xl font-bold text-neutral-darkBlue mb-4">Order Status</h3>
             <div className="space-y-3">
@@ -173,7 +173,7 @@ export default function AdminDashboard() {
           </CardBody>
         </Card>
 
-        <Card>
+        <Card className="h-full">
           <CardBody>
             <h3 className="text-xl font-bold text-neutral-darkBlue mb-4">Document Verification</h3>
             <div className="space-y-3">
@@ -193,7 +193,7 @@ export default function AdminDashboard() {
           </CardBody>
         </Card>
 
-        <Card>
+        <Card className="h-full">
           <CardBody>
             <h3 className="text-xl font-bold text-neutral-darkBlue mb-4">User Overview</h3>
             <div className="space-y-3">
