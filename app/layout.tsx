@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import './globals.css';
+import './style.css';
 import ClientLayout from '@/components/ClientLayout';
 
 export const metadata: Metadata = {
@@ -13,8 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
-      <body className="min-h-full flex flex-col antialiased bg-neutral-lightGray">
+    <html lang="en">
+      <body className="antialiased layout-shell">
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>

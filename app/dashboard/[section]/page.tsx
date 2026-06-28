@@ -19,7 +19,7 @@ export default function DashboardSectionPage() {
   }, [section, router]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-neutral-light to-white section-padding">
+    <div className="min-h-screen auth-bg-gradient section-padding">
       <div className="container-max">
         <div className="card max-w-md mx-auto text-center">
           <p className="text-neutral-gray">Loading dashboard section...</p>

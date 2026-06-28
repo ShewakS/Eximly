@@ -152,15 +152,13 @@ export default function OrderMonitoring() {
                       {formatDate(order.createdAt)}
                     </td>
                     <td className="py-3 px-4">
-                      <span
-                        className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                          order.status === 'completed'
-                            ? 'bg-status-success text-white'
-                            : order.status === 'cancelled'
-                            ? 'bg-status-danger text-white'
-                            : 'bg-status-warning text-gray-900'
-                        }`}
-                      >
+                      <span className={`badge ${
+                        order.status === 'completed'
+                          ? 'badge-delivered'
+                          : order.status === 'cancelled'
+                          ? 'badge-rejected'
+                          : 'badge-pending'
+                      }`}>
                         {order.status.toUpperCase()}
                       </span>
                     </td>

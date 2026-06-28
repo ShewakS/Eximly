@@ -63,7 +63,9 @@ export default function ExportForm() {
           <h1 className="text-3xl font-bold text-center mb-8 text-neutral-dark">Create New Shipment</h1>
           
           {error && (
-            <div className="bg-status-danger bg-opacity-10 border border-status-danger text-status-danger px-4 py-3 rounded-lg mb-6">
+            <div
+              className="border border-status-danger text-status-danger px-4 py-3 rounded-lg mb-6 status-box-danger"
+            >
               {error}
             </div>
           )}
@@ -124,8 +126,10 @@ export default function ExportForm() {
 
             {/* Conditional International Fields */}
             {type === 'international' && (
-              <div className="mt-8 pt-8 border-t border-gray-200 grid-responsive-3 animate-in fade-in duration-500">
-                <div className="md:col-span-2">
+              <div
+                className="border-t border-gray-200 grid-responsive-3 export-section-header"
+              >
+                <div className="col-span-full">
                   <h3 className="text-xl font-semibold text-primary-indigo mb-4">International Documentation</h3>
                 </div>
                 <div>

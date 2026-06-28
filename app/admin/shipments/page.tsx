@@ -134,22 +134,20 @@ export default function ShipmentTracking() {
                         </div>
                       </td>
                       <td className="py-3 px-4">
-                        <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold ${
-                          shipment.exportType === 'domestic'
-                            ? 'bg-status-info bg-opacity-20 text-status-info'
-                            : 'bg-accent-orange bg-opacity-20 text-accent-orange'
+                        <span className={`badge ${
+                          shipment.exportType === 'domestic' ? 'badge-domestic' : 'badge-international'
                         }`}>
-                          {shipment.exportType === 'domestic' ? <HomeIcon className="text-xs" /> : <PublicIcon className="text-xs" />}
+                          {shipment.exportType === 'domestic' ? <HomeIcon className="icon-sm" /> : <PublicIcon className="icon-sm" />}
                           {shipment.exportType.charAt(0).toUpperCase() + shipment.exportType.slice(1)}
                         </span>
                       </td>
                       <td className="py-3 px-4">
-                        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                        <span className={`badge ${
                           shipment.status === 'delivered'
-                            ? 'bg-status-success text-white'
+                            ? 'badge-delivered'
                             : shipment.status === 'in_transit'
-                            ? 'bg-ocean-sky text-white'
-                            : 'bg-status-warning text-gray-900'
+                            ? 'badge-transit'
+                            : 'badge-pending'
                         }`}>
                           {shipment.status.replace('_', ' ').toUpperCase()}
                         </span>

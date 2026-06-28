@@ -11,53 +11,38 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 export default function Home() {
   return (
     <div className="bg-white text-neutral-dark">
-      {/* TransX Hero Banner Section */}
-      <section className="relative h-[520px] flex items-center overflow-hidden bg-neutral-footer">
-        {/* Background Image with Dark Overlay */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ 
-            backgroundImage: "url('https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1920&q=80')",
-            backgroundPosition: 'center 30%',
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-neutral-footer/95 via-neutral-footer/75 to-neutral-footer/20" />
 
-        {/* Slanted Chevron Shape Overlay — reduced width, cleaner right space */}
-        <div 
-          className="absolute right-0 top-0 bottom-0 w-[20%] bg-white hidden lg:block"
-          style={{ clipPath: 'polygon(40px 0, 100% 0, 100% 100%, 40px 100%, 0 50%)' }}
-        >
-          <div 
-            className="absolute left-1.5 top-0 bottom-0 w-full bg-neutral-lightGray"
-            style={{ clipPath: 'polygon(40px 0, 100% 0, 100% 100%, 40px 100%, 0 50%)' }}
-          />
+      {/* ── Hero Banner Section ── */}
+      <section className="hero-banner">
+        {/* Background Image */}
+        <div className="hero-bg-home" />
+        
+        {/* Gradient overlay */}
+        <div className="hero-overlay" />
+        
+        {/* Slanted Chevron Shape */}
+        <div className="hidden lg:block hero-chevron">
+          <div className="hero-chevron-inner" />
         </div>
 
-        {/* Content Container */}
-        <div className="container-max relative z-10 px-6 lg:px-8">
-          <div className="max-w-xl text-white">
-            <span className="text-ocean-light font-bold tracking-widest text-xs uppercase mb-3 block">
+        {/* Content */}
+        <div className="container-max relative z-10 px-6">
+          <div className="hero-content">
+            <span className="font-bold tracking-widest text-xs uppercase mb-3 block hero-eyebrow">
               Logistics &amp; Transportation
             </span>
-            <h1 className="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-5">
+            <h1 className="font-extrabold leading-tight mb-5 hero-title">
               Simplify Your Import-Export Management
             </h1>
-            <p className="text-base text-neutral-lightGray/80 mb-7 leading-relaxed max-w-lg">
+            <p className="text-base mb-7 leading-relaxed hero-desc">
               Eximly is a modern platform designed to streamline shipment tracking,
               export handling, and logistics workflows for businesses of all sizes.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link
-                href="/auth/login"
-                className="bg-ocean-sky hover:bg-ocean-deep text-white font-bold text-sm px-7 py-3 rounded transition duration-300 shadow-lg hover:shadow-xl inline-flex items-center gap-2"
-              >
-                GET STARTED <ArrowForwardIcon className="text-sm" />
+              <Link href="/auth/login" className="btn hero-cta-started">
+                GET STARTED <ArrowForwardIcon className="icon-sm" />
               </Link>
-              <Link
-                href="/about"
-                className="bg-transparent border-2 border-white hover:bg-white hover:text-neutral-dark text-white font-bold text-sm px-7 py-3 rounded transition duration-300 inline-flex items-center gap-2"
-              >
+              <Link href="/about" className="btn hero-cta-learn">
                 LEARN MORE
               </Link>
             </div>
@@ -65,89 +50,89 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Powerful Features (About Us) Section */}
+      {/* ── About Us / Features Section ── */}
       <section className="py-16 px-6 bg-white overflow-hidden">
-        <div className="container-max px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-            {/* Left Image with overlay box */}
-            <div className="relative pb-2">
-              <div className="rounded-xl overflow-hidden shadow-xl" style={{ height: '320px' }}>
-                <img 
-                  src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" 
+        <div className="container-max px-6">
+          <div className="grid gap-8 lg:grid-cols-2 items-start">
+            {/* Left Image */}
+            <div className="about-img-container">
+              <div className="about-img-wrapper">
+                <img
+                  src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
                   alt="Logistics warehouse worker"
-                  className="w-full h-full object-cover transition duration-700 hover:scale-105"
+                  className="about-img"
                 />
-                <div className="absolute inset-0 bg-neutral-darkBlue/10 hover:bg-transparent transition duration-300" />
+                <div className="about-img-overlay" />
               </div>
-              {/* Badge overlay */}
-              <div className="absolute bottom-6 left-5 bg-ocean-sky text-white p-4 rounded-lg shadow-xl max-w-[220px] transition transform hover:scale-105">
-                <p className="text-[10px] font-bold tracking-widest uppercase mb-1 text-ocean-light">
+              {/* Badge */}
+              <div className="about-badge">
+                <p className="font-bold tracking-widest uppercase mb-1 about-badge-title">
                   TRANSX EXCELLENCE
                 </p>
-                <h4 className="text-sm font-bold leading-snug">
-                  Faster than you can imagine
-                </h4>
+                <h4 className="text-sm font-bold leading-snug about-badge-subtitle">Faster than you can imagine</h4>
               </div>
             </div>
 
-            {/* Right content info */}
+            {/* Right Content */}
             <div className="pt-2">
-              <span className="text-ocean-sky font-bold tracking-wider text-xs uppercase mb-2 block">
+              <span className="font-bold tracking-wider text-xs uppercase mb-2 block text-ocean-sky">
                 ABOUT US
               </span>
-              <h2 className="text-2xl md:text-3xl font-extrabold text-neutral-darkBlue mb-4 leading-tight">
+              <h2 className="font-extrabold leading-tight mb-4 why-title text-neutral-darkBlue">
                 Powerful Features of <span className="text-ocean-sky">Transportation</span> company
               </h2>
-              <p className="text-neutral-gray text-sm mb-6 leading-relaxed">
-                Eximly provides a unified platform to coordinate, execute, and monitor your global shipments. 
-                Our tool is custom built for modern trading networks, handling both domestic compliance and complex international documentation rules in under one minute.
+              <p className="text-sm mb-6 leading-relaxed text-neutral-gray">
+                Eximly provides a unified platform to coordinate, execute, and monitor your global shipments.
+                Our tool is custom built for modern trading networks, handling both domestic compliance and
+                complex international documentation rules in under one minute.
               </p>
 
-              {/* Bullet list with Check circles */}
               <ul className="space-y-4">
-                <li className="flex items-start gap-3">
-                  <CheckCircleIcon className="text-ocean-sky text-xl mt-0.5 shrink-0" />
-                  <div>
-                    <h4 className="font-bold text-neutral-darkBlue text-sm">Full Customs Compliance</h4>
-                    <p className="text-xs text-neutral-gray mt-0.5">Automated validation of passports, tax documents, and declarations.</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircleIcon className="text-ocean-sky text-xl mt-0.5 shrink-0" />
-                  <div>
-                    <h4 className="font-bold text-neutral-darkBlue text-sm">Real-time Sea &amp; Air Cargo Info</h4>
-                    <p className="text-xs text-neutral-gray mt-0.5">Direct integrations for shipping schedules and tracking status updates.</p>
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircleIcon className="text-ocean-sky text-xl mt-0.5 shrink-0" />
-                  <div>
-                    <h4 className="font-bold text-neutral-darkBlue text-sm">Conditional Document Workflows</h4>
-                    <p className="text-xs text-neutral-gray mt-0.5">Dynamic form fields adapt instantly to selected destination countries.</p>
-                  </div>
-                </li>
+                {[
+                  {
+                    title: 'Full Customs Compliance',
+                    desc: 'Automated validation of passports, tax documents, and declarations.',
+                  },
+                  {
+                    title: 'Real-time Sea & Air Cargo Info',
+                    desc: 'Direct integrations for shipping schedules and tracking status updates.',
+                  },
+                  {
+                    title: 'Conditional Document Workflows',
+                    desc: 'Dynamic form fields adapt instantly to selected destination countries.',
+                  },
+                ].map((item) => (
+                  <li key={item.title} className="flex items-start gap-3">
+                    <CheckCircleIcon className="check-icon" />
+                    <div>
+                      <h4 className="font-bold text-sm text-neutral-darkBlue">{item.title}</h4>
+                      <p className="text-xs mt-1 text-neutral-gray">{item.desc}</p>
+                    </div>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Our Mission & Signature Section */}
-      <section className="py-14 px-6 bg-neutral-lightGray border-y border-neutral-light">
-        <div className="container-max px-6 lg:px-8">
-          <div className="max-w-2xl mx-auto text-center">
-            <span className="text-ocean-sky font-bold tracking-wider text-xs uppercase mb-2 block">
+      {/* ── Our Mission Section ── */}
+      <section className="py-14 px-6 bg-neutral-lightGray border-t border-b border-neutral-light">
+        <div className="container-max px-6">
+          <div className="mission-container">
+            <span className="font-bold tracking-wider text-xs uppercase mb-2 block text-ocean-sky">
               OUR MISSION
             </span>
-            <h2 className="text-xl md:text-2xl font-extrabold text-neutral-darkBlue mb-4">
+            <h2 className="font-extrabold mb-4 text-neutral-darkBlue text-xl md:text-2xl">
               Our mission is to give you good service
             </h2>
-            <p className="text-neutral-gray text-sm leading-relaxed mb-5 italic">
-              &quot;We believe logistics shouldn&apos;t be complex. By digitizing paperwork and automating compliance checks, we allow import-export companies to scale fast, transparently, and safely across borders.&quot;
+            <p className="text-sm leading-relaxed mb-5 italic text-neutral-gray">
+              &quot;We believe logistics shouldn&apos;t be complex. By digitizing paperwork and automating compliance
+              checks, we allow import-export companies to scale fast, transparently, and safely across borders.&quot;
             </p>
             <div className="flex flex-col items-center justify-center">
               <span className="font-serif italic text-xl font-bold text-neutral-darkBlue">Andy Collins</span>
-              <span className="text-xs text-neutral-gray font-bold tracking-wider uppercase mt-1">
+              <span className="text-xs font-bold tracking-wider uppercase mt-1 text-neutral-gray">
                 Andy Collins, CEO Eximly Inc.
               </span>
             </div>
@@ -155,103 +140,67 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Why Choose Us & Grid Section */}
+      {/* ── Why Choose Us Section ── */}
       <section className="py-16 px-6 bg-white">
-        <div className="container-max px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-center mb-10 text-neutral-darkBlue">
+        <div className="container-max px-6">
+          <h2 className="font-extrabold text-center mb-10 text-neutral-darkBlue why-title">
             Why Choose Eximly?
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-white border border-neutral-light p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300 text-center">
-              <div className="w-11 h-11 rounded-full bg-ocean-sky/10 flex items-center justify-center text-ocean-sky mx-auto mb-4">
-                <SpeedIcon className="text-xl" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { icon: <SpeedIcon className="icon-sm" />, title: 'Fast & Efficient', desc: 'Create and submit export documentation in less than 1 minute.' },
+              { icon: <PublicIcon className="icon-sm" />, title: 'Global Support', desc: 'Handle international exports with country-specific compliance checks.' },
+              { icon: <SecurityIcon className="icon-sm" />, title: 'Secure & Safe', desc: 'Protected routes, token authentication, and data encryption.' },
+              { icon: <AssessmentIcon className="icon-sm" />, title: 'Analytics Dashboard', desc: 'Monitor status updates, active orders, and completed trades.' },
+            ].map((item) => (
+              <div key={item.title} className="why-card rounded-xl text-center transition">
+                <div className="why-icon-wrapper rounded-full flex items-center justify-center mx-auto mb-4">
+                  {item.icon}
+                </div>
+                <h3 className="text-base font-bold mb-2 text-neutral-darkBlue">{item.title}</h3>
+                <p className="text-xs leading-relaxed text-neutral-gray">{item.desc}</p>
               </div>
-              <h3 className="text-base font-bold mb-2 text-neutral-darkBlue">Fast &amp; Efficient</h3>
-              <p className="text-xs text-neutral-gray leading-relaxed">
-                Create and submit export documentation in less than 1 minute.
-              </p>
-            </div>
-
-            <div className="bg-white border border-neutral-light p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300 text-center">
-              <div className="w-11 h-11 rounded-full bg-ocean-sky/10 flex items-center justify-center text-ocean-sky mx-auto mb-4">
-                <PublicIcon className="text-xl" />
-              </div>
-              <h3 className="text-base font-bold mb-2 text-neutral-darkBlue">Global Support</h3>
-              <p className="text-xs text-neutral-gray leading-relaxed">
-                Handle international exports with country-specific compliance checks.
-              </p>
-            </div>
-
-            <div className="bg-white border border-neutral-light p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300 text-center">
-              <div className="w-11 h-11 rounded-full bg-ocean-sky/10 flex items-center justify-center text-ocean-sky mx-auto mb-4">
-                <SecurityIcon className="text-xl" />
-              </div>
-              <h3 className="text-base font-bold mb-2 text-neutral-darkBlue">Secure &amp; Safe</h3>
-              <p className="text-xs text-neutral-gray leading-relaxed">
-                Protected routes, token authentication, and data encryption.
-              </p>
-            </div>
-
-            <div className="bg-white border border-neutral-light p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300 text-center">
-              <div className="w-11 h-11 rounded-full bg-ocean-sky/10 flex items-center justify-center text-ocean-sky mx-auto mb-4">
-                <AssessmentIcon className="text-xl" />
-              </div>
-              <h3 className="text-base font-bold mb-2 text-neutral-darkBlue">Analytics Dashboard</h3>
-              <p className="text-xs text-neutral-gray leading-relaxed">
-                Monitor status updates, active orders, and completed trades.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* High Work Achievements Statistics Section */}
-      <section className="py-14 bg-neutral-footer text-white px-6 relative overflow-hidden">
-        <div 
-          className="absolute inset-0 opacity-10 bg-cover bg-center bg-no-repeat"
-          style={{ 
-            backgroundImage: "url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1200&q=80')",
-          }}
-        />
-        <div className="container-max relative z-10 text-center px-6 lg:px-8">
-          <span className="text-ocean-light font-bold tracking-wider text-xs uppercase mb-2 block">
+      {/* ── Statistics Section ── */}
+      <section className="py-14 px-6 relative overflow-hidden achievements-section">
+        <div className="achievements-bg-img" />
+        <div className="container-max relative z-10 text-center px-6">
+          <span className="font-bold tracking-wider text-xs uppercase mb-2 block hero-eyebrow">
             ACHIEVEMENTS
           </span>
           <h2 className="text-2xl font-extrabold mb-10 text-white">High Work Achievements</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <div className="text-5xl font-extrabold text-ocean-light mb-2">50</div>
-              <div className="text-xs text-neutral-lightGray/70 font-semibold uppercase tracking-wider">
-                Cities Around the World
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { value: '50', label: 'Cities Around the World' },
+              { value: '2M', label: 'Happy Clients' },
+              { value: '1.2M', label: 'Delivered Goods' },
+            ].map((stat) => (
+              <div key={stat.label}>
+                <div className="font-extrabold mb-2 achievements-number">{stat.value}</div>
+                <div className="text-xs font-semibold uppercase tracking-wider achievements-label">
+                  {stat.label}
+                </div>
               </div>
-            </div>
-            <div>
-              <div className="text-5xl font-extrabold text-ocean-light mb-2">2M</div>
-              <div className="text-xs text-neutral-lightGray/70 font-semibold uppercase tracking-wider">
-                Happy Clients
-              </div>
-            </div>
-            <div>
-              <div className="text-5xl font-extrabold text-ocean-light mb-2">1.2M</div>
-              <div className="text-xs text-neutral-lightGray/70 font-semibold uppercase tracking-wider">
-                Delivered Goods
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="bg-ocean-deep py-14 px-6 text-white">
-        <div className="container-max text-center px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-extrabold mb-4">Ready to Streamline Your Logistics?</h2>
-          <p className="text-sm text-neutral-lightGray/90 mb-6 max-w-lg mx-auto leading-relaxed">
-            Join thousands of businesses using Eximly to manage their imports and exports, track shipments, and clear customs faster.
+      {/* ── CTA Section ── */}
+      <section className="py-14 px-6 text-white cta-section">
+        <div className="container-max text-center px-6">
+          <h2 className="font-extrabold mb-4 cta-title">
+            Ready to Streamline Your Logistics?
+          </h2>
+          <p className="text-sm mb-6 leading-relaxed mx-auto cta-desc">
+            Join thousands of businesses using Eximly to manage their imports and exports,
+            track shipments, and clear customs faster.
           </p>
-          <Link 
-            href="/auth/login" 
-            className="bg-accent-orange hover:bg-accent-orangeHover inline-block text-white px-7 py-3 rounded font-bold text-sm transition duration-300 shadow-md hover:shadow-lg"
-          >
+          <Link href="/auth/login" className="btn cta-button">
             Start Your Free Trial
           </Link>
         </div>

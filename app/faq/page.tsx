@@ -77,7 +77,10 @@ export default function FAQPage() {
           <p className="text-lg mb-6">
             We're here to help! Get in touch with our support team.
           </p>
-          <Link href="/contact" className="btn-primary bg-accent-pink hover:bg-accent-orange">
+          <Link
+            href="/contact"
+            className="btn-primary btn-pink"
+          >
             Contact Us
           </Link>
         </div>

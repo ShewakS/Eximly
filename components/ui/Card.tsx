@@ -5,9 +5,10 @@ interface CardProps {
 }
 
 export default function Card({ children, className = '', onClick }: CardProps) {
+  const clickableClass = onClick ? 'card-clickable' : '';
   return (
     <div
-      className={`bg-white rounded-xl shadow-lg border border-gray-100 ${onClick ? 'cursor-pointer hover:shadow-xl transition-shadow' : ''} ${className}`}
+      className={`card ${clickableClass} ${className}`}
       onClick={onClick}
     >
       {children}
@@ -16,13 +17,25 @@ export default function Card({ children, className = '', onClick }: CardProps) {
 }
 
 export function CardHeader({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  return <div className={`p-6 border-b border-gray-100 ${className}`}>{children}</div>;
+  return (
+    <div className={`card-header ${className}`}>
+      {children}
+    </div>
+  );
 }
 
 export function CardBody({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  return <div className={`p-6 ${className}`}>{children}</div>;
+  return (
+    <div className={`card-body ${className}`}>
+      {children}
+    </div>
+  );
 }
 
 export function CardFooter({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  return <div className={`p-6 border-t border-gray-100 ${className}`}>{children}</div>;
+  return (
+    <div className={`card-footer ${className}`}>
+      {children}
+    </div>
+  );
 }

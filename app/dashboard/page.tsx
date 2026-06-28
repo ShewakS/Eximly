@@ -84,24 +84,24 @@ export default function DashboardPage() {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="dashboard-stats-grid">
           <div className="card text-center">
-            <div className="text-4xl font-bold text-primary-blue mb-2">{totalShipments}</div>
-            <p className="text-neutral-gray font-semibold">Total Shipments</p>
+            <div className="text-4xl font-bold mb-2 dashboard-stat-num-blue">{totalShipments}</div>
+            <p className="font-semibold text-neutral-gray">Total Shipments</p>
           </div>
           <div className="card text-center">
-            <div className="text-4xl font-bold text-accent-orange mb-2">{activeOrders}</div>
-            <p className="text-neutral-gray font-semibold">Active Orders</p>
+            <div className="text-4xl font-bold mb-2 dashboard-stat-num-orange">{activeOrders}</div>
+            <p className="font-semibold text-neutral-gray">Active Orders</p>
           </div>
           <div className="card text-center">
-            <div className="text-4xl font-bold text-status-success mb-2">{completedTrades}</div>
-            <p className="text-neutral-gray font-semibold">Completed Trades</p>
+            <div className="text-4xl font-bold mb-2 dashboard-stat-num-green">{completedTrades}</div>
+            <p className="font-semibold text-neutral-gray">Completed Trades</p>
           </div>
         </div>
 
         {/* Actions */}
         <div className="mb-12">
-          <Link href="/export/form" className="btn-primary inline-flex items-center gap-1.5">
+          <Link href="/export/form" className="btn btn-primary btn-md">
             <AddIcon className="text-lg" /> Add Shipment
           </Link>
         </div>
@@ -143,30 +143,19 @@ export default function DashboardPage() {
                     <tr key={shipment._id} className="border-b border-neutral-light hover:bg-neutral-light">
                       <td className="py-3 px-4">{shipment.productName}</td>
                       <td className="py-3 px-4">{shipment.quantity}</td>
-                      <td className="py-3 px-4">
-                        <span className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-semibold ${
-                          shipment.exportType === 'domestic'
-                            ? 'bg-status-info bg-opacity-20 text-status-info'
-                            : 'bg-accent-orange bg-opacity-20 text-accent-orange'
+                    <td className="py-3 px-4">
+                        <span className={`badge ${
+                          shipment.exportType === 'domestic' ? 'badge-domestic' : 'badge-international'
                         }`}>
-                          {shipment.exportType === 'domestic' ? (
-                            <>
-                              <HomeIcon className="text-sm" /> Domestic
-                            </>
-                          ) : (
-                            <>
-                              <PublicIcon className="text-sm" /> International
-                            </>
-                          )}
+                          {shipment.exportType === 'domestic' ? <HomeIcon className="icon-sm" /> : <PublicIcon className="icon-sm" />}
+                          {shipment.exportType === 'domestic' ? 'Domestic' : 'International'}
                         </span>
                       </td>
                       <td className="py-3 px-4">
-                        <span className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                          shipment.status === 'delivered'
-                            ? 'bg-status-success bg-opacity-20 text-status-success'
-                            : shipment.status === 'in_transit'
-                            ? 'bg-accent-orange bg-opacity-20 text-accent-orange'
-                            : 'bg-status-warning bg-opacity-20 text-status-warning'
+                        <span className={`badge ${
+                          shipment.status === 'delivered' ? 'badge-delivered-soft'
+                            : shipment.status === 'in_transit' ? 'badge-transit-soft'
+                            : 'badge-pending-soft'
                         }`}>
                           {shipment.status.replace('_', ' ').charAt(0).toUpperCase() + shipment.status.replace('_', ' ').slice(1)}
                         </span>

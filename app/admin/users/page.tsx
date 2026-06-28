@@ -143,24 +143,16 @@ export default function UserManagement() {
                     <td className="py-3 px-4 text-neutral-gray">{user.email}</td>
                     <td className="py-3 px-4 text-neutral-gray">{user.phone}</td>
                     <td className="py-3 px-4">
-                      <span
-                        className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                          user.role === 'admin'
-                            ? 'bg-accent-orange text-white'
-                            : 'bg-ocean-sky text-white'
-                        }`}
-                      >
+                      <span className={`badge ${
+                        user.role === 'admin' ? 'badge-admin-role' : 'badge-user-role'
+                      }`}>
                         {user.role}
                       </span>
                     </td>
                     <td className="py-3 px-4">
-                      <span
-                        className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                          user.isActive
-                            ? 'bg-status-success text-white'
-                            : 'bg-status-danger text-white'
-                        }`}
-                      >
+                      <span className={`badge ${
+                        user.isActive ? 'badge-active-status' : 'badge-inactive-status'
+                      }`}>
                         {user.isActive ? 'Active' : 'Inactive'}
                       </span>
                     </td>

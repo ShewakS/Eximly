@@ -25,23 +25,23 @@ function StatCard({
   label,
   value,
   sub,
-  gradient,
+  gradientClass,
 }: {
   icon: React.ReactNode;
   label: string;
   value: number;
   sub?: string;
-  gradient: string;
+  gradientClass: string;
 }) {
   return (
-    <div className={`rounded-2xl p-6 text-white ${gradient} shadow-md h-full`}>
+    <div className={`analytics-stat-card ${gradientClass}`}>
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-white/80 text-sm font-medium mb-1">{label}</p>
+          <p className="text-sm font-medium mb-1 text-white opacity-75">{label}</p>
           <p className="text-4xl font-extrabold">{value}</p>
-          {sub && <p className="text-white/60 text-xs mt-1">{sub}</p>}
+          {sub && <p className="text-xs mt-1 text-white opacity-50">{sub}</p>}
         </div>
-        <div className="text-white/70 text-4xl">{icon}</div>
+        <div className="text-white opacity-75 text-4xl">{icon}</div>
       </div>
     </div>
   );
@@ -59,14 +59,13 @@ function StatusRow({
   color: string;
 }) {
   const pct = total > 0 ? Math.round((value / total) * 100) : 0;
+  const widthStep = Math.min(100, Math.round(pct / 5) * 5);
+  const widthClass = `progress-fill-w-${widthStep}`;
   return (
     <div className="flex items-center justify-between p-3 bg-neutral-lightGray rounded-lg gap-4">
       <span className="text-neutral-gray text-sm font-medium w-28 flex-shrink-0">{label}</span>
-      <div className="flex-1 bg-neutral-light rounded-full h-2 overflow-hidden">
-        <div
-          className={`h-2 rounded-full transition-all duration-500 ${color}`}
-          style={{ width: `${pct}%` }}
-        />
+      <div className="progress-track">
+        <div className={`progress-fill ${color} ${widthClass}`} />
       </div>
       <span className="font-bold text-neutral-darkBlue text-sm w-8 text-right">{value}</span>
     </div>
@@ -122,39 +121,39 @@ export default function AnalyticsPage() {
       </div>
 
       {/* Top Stat Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="analytics-stat-card-wrap">
         <StatCard
           icon={<PeopleIcon fontSize="inherit" />}
           label="Total Users"
           value={d.users.total}
           sub={`${d.users.admins} admin${d.users.admins !== 1 ? 's' : ''}`}
-          gradient="bg-gradient-to-br from-ocean-sky to-ocean-deep"
+          gradientClass="analytics-stat-card-gradient-1"
         />
         <StatCard
           icon={<DirectionsBoatIcon fontSize="inherit" />}
           label="Shipments"
           value={d.shipments.total}
           sub={`${d.shipments.inTransit} in transit`}
-          gradient="bg-gradient-to-br from-ocean-deep to-[#003545]"
+          gradientClass="analytics-stat-card-gradient-2"
         />
         <StatCard
           icon={<LocalShippingIcon fontSize="inherit" />}
           label="Orders"
           value={d.orders.total}
           sub={`${d.orders.pending} pending`}
-          gradient="bg-gradient-to-br from-accent-orange to-accent-orangeHover"
+          gradientClass="analytics-stat-card-gradient-3"
         />
         <StatCard
           icon={<DescriptionIcon fontSize="inherit" />}
           label="Documents"
           value={d.documents.total}
           sub={`${d.documents.pending} pending review`}
-          gradient="bg-gradient-to-br from-[#6f42c1] to-[#5a35a8]"
+          gradientClass="analytics-stat-card-gradient-4"
         />
       </div>
 
       {/* Breakdowns */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid lg:grid-cols-2 gap-6">
 
         {/* Shipments */}
         <div className="card h-full">
@@ -185,7 +184,7 @@ export default function AnalyticsPage() {
         {/* Documents */}
         <div className="card h-full">
           <div className="flex items-center gap-2 mb-6">
-            <DescriptionIcon className="text-[#6f42c1]" />
+            <DescriptionIcon className="text-primary-purple" />
             <h2 className="text-xl font-bold text-neutral-darkBlue">Document Verification</h2>
           </div>
           <div className="space-y-3">
@@ -212,15 +211,15 @@ export default function AnalyticsPage() {
           </div>
 
           {/* Quick summary chips */}
-          <div className="mt-6 flex flex-wrap gap-3">
-            <div className="flex items-center gap-1.5 bg-status-success/10 text-status-success px-3 py-1.5 rounded-full text-xs font-bold">
-              <CheckCircleIcon className="text-sm" /> {d.orders.completed} Completed Orders
+          <div className="summary-chips-wrap">
+            <div className="summary-chip summary-chip-success">
+              <CheckCircleIcon className="icon-sm" /> {d.orders.completed} Completed Orders
             </div>
-            <div className="flex items-center gap-1.5 bg-status-danger/10 text-status-danger px-3 py-1.5 rounded-full text-xs font-bold">
-              <CancelIcon className="text-sm" /> {d.orders.cancelled} Cancelled Orders
+            <div className="summary-chip summary-chip-danger">
+              <CancelIcon className="icon-sm" /> {d.orders.cancelled} Cancelled Orders
             </div>
-            <div className="flex items-center gap-1.5 bg-status-warning/10 text-status-warning px-3 py-1.5 rounded-full text-xs font-bold">
-              <PendingIcon className="text-sm" /> {d.shipments.pending} Pending Shipments
+            <div className="summary-chip summary-chip-warning">
+              <PendingIcon className="icon-sm" /> {d.shipments.pending} Pending Shipments
             </div>
           </div>
         </div>

@@ -11,7 +11,6 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Redirect if already logged in
   useEffect(() => {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
@@ -48,7 +47,6 @@ export default function LoginPage() {
         return;
       }
 
-      // Store token and user info
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
 
@@ -65,19 +63,21 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-[85vh] flex items-center justify-center bg-neutral-lightGray px-6 py-12">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-neutral-light p-8 md:p-10 transition duration-300 hover:shadow-2xl">
-        <h1 className="text-3xl font-extrabold text-center mb-8 text-neutral-darkBlue">Login</h1>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h1 className="auth-title">
+          Login
+        </h1>
 
         {error && (
-          <div className="bg-status-danger bg-opacity-10 border border-status-danger text-status-danger px-4 py-3 rounded-lg mb-6 text-sm font-medium">
+          <div className="auth-error-box">
             {error}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="email" className="block text-sm font-bold text-neutral-darkBlue mb-2">
+            <label htmlFor="email" className="auth-label">
               Email Address
             </label>
             <input
@@ -87,12 +87,11 @@ export default function LoginPage() {
               onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
               required
               placeholder="you@example.com"
-              className="w-full px-4 py-3 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-ocean-sky/30 focus:border-ocean-sky transition text-neutral-dark"
             />
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-bold text-neutral-darkBlue mb-2">
+            <label htmlFor="password" className="auth-label">
               Password
             </label>
             <input
@@ -102,7 +101,6 @@ export default function LoginPage() {
               onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
               required
               placeholder="Enter your password"
-              className="w-full px-4 py-3 border border-neutral-light rounded-lg focus:outline-none focus:ring-2 focus:ring-ocean-sky/30 focus:border-ocean-sky transition text-neutral-dark"
             />
           </div>
 
@@ -110,21 +108,21 @@ export default function LoginPage() {
             type="submit"
             id="login-submit"
             disabled={loading}
-            className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed mt-2 cursor-pointer"
+            className="btn btn-primary btn-md w-full mt-2"
           >
             {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
 
-        <div className="mt-8 pt-6 border-t border-neutral-light text-center space-y-3">
-          <p className="text-sm text-neutral-gray">
-            Don't have an account?{' '}
-            <Link href="/auth/signup" className="text-ocean-sky font-bold hover:underline">
+        <div className="auth-footer">
+          <p className="text-sm text-neutral-gray mb-3">
+            Don&apos;t have an account?{' '}
+            <Link href="/auth/signup" className="text-ocean-sky font-bold">
               Sign up
             </Link>
           </p>
           <p className="text-sm">
-            <Link href="/auth/forgot-password" className="text-ocean-sky hover:underline font-semibold">
+            <Link href="/auth/forgot-password" className="text-ocean-sky font-semibold">
               Forgot password?
             </Link>
           </p>

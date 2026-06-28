@@ -20,110 +20,103 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const sidebarItems = [
-    { href: '/admin/dashboard', label: 'Dashboard', icon: <DashboardIcon className="text-lg" /> },
-    { href: '/admin/users', label: 'Users', icon: <PeopleIcon className="text-lg" /> },
-    { href: '/admin/shipments', label: 'Shipments', icon: <DirectionsBoatIcon className="text-lg" /> },
-    { href: '/admin/documents', label: 'Documents', icon: <DescriptionIcon className="text-lg" /> },
-    { href: '/admin/orders', label: 'Orders', icon: <LocalShippingIcon className="text-lg" /> },
-    { href: '/admin/analytics', label: 'Analytics', icon: <TrendingUpIcon className="text-lg" /> },
+    { href: '/admin/dashboard', label: 'Dashboard',  icon: <DashboardIcon className="icon-sm" /> },
+    { href: '/admin/users',     label: 'Users',       icon: <PeopleIcon className="icon-sm" /> },
+    { href: '/admin/shipments', label: 'Shipments',   icon: <DirectionsBoatIcon className="icon-sm" /> },
+    { href: '/admin/documents', label: 'Documents',   icon: <DescriptionIcon className="icon-sm" /> },
+    { href: '/admin/orders',    label: 'Orders',      icon: <LocalShippingIcon className="icon-sm" /> },
+    { href: '/admin/analytics', label: 'Analytics',   icon: <TrendingUpIcon className="icon-sm" /> },
   ];
 
   const isActive = (href: string) => pathname === href;
 
   return (
     <div className="min-h-screen bg-neutral-lightGray flex">
-      {/* Mobile sidebar backdrop */}
+
+      {/* Mobile backdrop */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40 md:hidden"
+          className="admin-mobile-backdrop"
           onClick={() => setIsSidebarOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 h-full w-64 bg-ocean-deep text-white z-50 transform transition-transform duration-300 ease-in-out ${
-          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0 flex flex-col`}
+        className={`admin-sidebar ${isSidebarOpen ? 'admin-sidebar-open' : 'admin-sidebar-closed'}`}
       >
-        <div className="p-6 border-b border-white/10 flex items-center justify-between">
-          <Link href="/admin/dashboard" className="text-2xl font-bold flex items-center gap-2 text-white hover:opacity-90 transition">
-            <DirectionsBoatIcon className="text-ocean-sky text-2xl" />
-            <span className="tracking-wider">Eximly Admin</span>
+        {/* Logo */}
+        <div className="admin-sidebar-header">
+          <Link href="/admin/dashboard" className="admin-sidebar-logo">
+            <DirectionsBoatIcon className="icon-md text-ocean-sky" />
+            <span className="tracking-wide">Eximly Admin</span>
           </Link>
         </div>
-        <nav className="p-4 flex-1">
-          <ul className="space-y-2">
+
+        {/* Nav */}
+        <nav className="admin-sidebar-nav">
+          <ul className="admin-sidebar-menu">
             {sidebarItems.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                    isActive(item.href)
-                      ? 'bg-ocean-sky text-white font-bold shadow-md'
-                      : 'hover:bg-white/10 text-white/80 hover:text-white'
-                  }`}
+                  className={`admin-nav-link ${isActive(item.href) ? 'admin-nav-link-active' : ''}`}
                   onClick={() => setIsSidebarOpen(false)}
                 >
                   <span className="flex items-center">{item.icon}</span>
-                  <span className="font-medium text-sm">{item.label}</span>
+                  <span>{item.label}</span>
                 </Link>
               </li>
             ))}
           </ul>
         </nav>
-        <div className="p-4 border-t border-white/10">
-          <Link
-            href="/"
-            className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/10 transition-colors text-white/80 hover:text-white"
-          >
-            <HomeIcon className="text-lg" />
-            <span className="font-medium text-sm">Back to Home</span>
+
+        {/* Back to Home */}
+        <div className="admin-sidebar-footer">
+          <Link href="/" className="admin-sidebar-back-link">
+            <HomeIcon className="icon-sm" />
+            <span>Back to Home</span>
           </Link>
         </div>
       </aside>
 
-      {/* Main content */}
-      <div className="flex-1 md:ml-64 flex flex-col min-h-screen">
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col min-h-screen md:ml-64">
         {/* Desktop Header */}
-        <header className="bg-white border-b border-gray-150 h-16 hidden md:flex items-center justify-between px-8 sticky top-0 z-30 shadow-sm">
+        <header className="hidden md:flex admin-header">
           <div className="flex items-center gap-3">
-            <AdminPanelSettingsIcon className="text-ocean-sky text-xl" />
+            <AdminPanelSettingsIcon className="icon-sm text-ocean-sky" />
             <span className="text-sm font-bold text-neutral-dark">Control Panel</span>
             <span className="text-neutral-light">|</span>
-            <span className="text-[11px] text-ocean-deep bg-ocean-sky/10 px-2.5 py-1 rounded-full font-bold uppercase tracking-wider">
-              Production Mode
-            </span>
+            <span className="admin-info-badge">Production Mode</span>
           </div>
           <div className="flex items-center gap-4">
             <div className="text-right">
-              <p className="text-sm font-bold text-neutral-dark">System Admin</p>
+              <p className="font-bold text-sm text-neutral-dark">System Admin</p>
               <p className="text-xs text-neutral-gray">admin@eximly.com</p>
             </div>
-            <div className="w-9 h-9 rounded-full bg-ocean-sky/15 text-ocean-sky font-bold flex items-center justify-center border border-ocean-sky/20">
-              A
-            </div>
+            <div className="admin-profile-circle">A</div>
           </div>
         </header>
 
-        {/* Mobile header */}
-        <div className="md:hidden bg-ocean-deep text-white p-4 flex items-center justify-between sticky top-0 z-30 shadow-md">
+        {/* Mobile Header */}
+        <div className="md:hidden admin-mobile-header">
           <button
             onClick={() => setIsSidebarOpen(true)}
-            className="p-2 rounded-lg hover:bg-white/10 transition text-white"
+            className="p-2 rounded-lg text-white"
           >
             <MenuIcon />
           </button>
           <span className="font-bold flex items-center gap-2">
-            <DirectionsBoatIcon className="text-ocean-sky text-xl" />
+            <DirectionsBoatIcon className="icon-sm text-ocean-sky" />
             Eximly Admin
           </span>
           <div className="w-10" />
         </div>
 
         {/* Page content */}
-        <main className="p-8 flex-1 bg-neutral-lightGray overflow-y-auto">
-          <div className="max-w-7xl mx-auto">
+        <main className="admin-main">
+          <div className="container-max">
             {children}
           </div>
         </main>

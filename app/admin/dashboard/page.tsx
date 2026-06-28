@@ -77,62 +77,62 @@ export default function AdminDashboard() {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className="bg-gradient-to-br from-ocean-sky to-ocean-deep text-white h-full">
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Card className="analytics-stat-card analytics-stat-card-gradient-1">
           <CardBody>
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-white/80 text-sm font-medium">Total Users</p>
-                <p className="text-3xl font-bold mt-1">{analytics?.users.total || 0}</p>
-                <p className="text-white/60 text-xs mt-1">{analytics?.users.admins || 0} admins</p>
+                <p className="text-white opacity-75 text-sm font-medium">Total Users</p>
+                <p className="text-3xl font-bold mt-1 text-white">{analytics?.users.total || 0}</p>
+                <p className="text-xs text-white opacity-50 mt-1">{analytics?.users.admins || 0} admins</p>
               </div>
-              <PeopleIcon className="text-4xl text-white/80" />
+              <PeopleIcon className="text-4xl text-white opacity-75" />
             </div>
           </CardBody>
         </Card>
 
-        <Card className="bg-gradient-to-br from-ocean-sky to-ocean-deep text-white h-full">
+        <Card className="analytics-stat-card analytics-stat-card-gradient-1">
           <CardBody>
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-white/80 text-sm font-medium">Total Shipments</p>
-                <p className="text-3xl font-bold mt-1">{analytics?.shipments.total || 0}</p>
-                <p className="text-white/60 text-xs mt-1">{analytics?.shipments.inTransit || 0} in transit</p>
+                <p className="text-white opacity-75 text-sm font-medium">Total Shipments</p>
+                <p className="text-3xl font-bold mt-1 text-white">{analytics?.shipments.total || 0}</p>
+                <p className="text-xs text-white opacity-50 mt-1">{analytics?.shipments.inTransit || 0} in transit</p>
               </div>
-              <DirectionsBoatIcon className="text-4xl text-white/80" />
+              <DirectionsBoatIcon className="text-4xl text-white opacity-75" />
             </div>
           </CardBody>
         </Card>
 
-        <Card className="bg-gradient-to-br from-ocean-sky to-ocean-deep text-white h-full">
+        <Card className="analytics-stat-card analytics-stat-card-gradient-1">
           <CardBody>
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-white/80 text-sm font-medium">Total Orders</p>
-                <p className="text-3xl font-bold mt-1">{analytics?.orders.total || 0}</p>
-                <p className="text-white/60 text-xs mt-1">{analytics?.orders.pending || 0} pending</p>
+                <p className="text-white opacity-75 text-sm font-medium">Total Orders</p>
+                <p className="text-3xl font-bold mt-1 text-white">{analytics?.orders.total || 0}</p>
+                <p className="text-xs text-white opacity-50 mt-1">{analytics?.orders.pending || 0} pending</p>
               </div>
-              <LocalShippingIcon className="text-4xl text-white/80" />
+              <LocalShippingIcon className="text-4xl text-white opacity-75" />
             </div>
           </CardBody>
         </Card>
 
-        <Card className="bg-gradient-to-br from-ocean-sky to-ocean-deep text-white h-full">
+        <Card className="analytics-stat-card analytics-stat-card-gradient-1">
           <CardBody>
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-white/80 text-sm font-medium">Total Documents</p>
-                <p className="text-3xl font-bold mt-1">{analytics?.documents.total || 0}</p>
-                <p className="text-white/60 text-xs mt-1">{analytics?.documents.pending || 0} pending</p>
+                <p className="text-white opacity-75 text-sm font-medium">Total Documents</p>
+                <p className="text-3xl font-bold mt-1 text-white">{analytics?.documents.total || 0}</p>
+                <p className="text-xs text-white opacity-50 mt-1">{analytics?.documents.pending || 0} pending</p>
               </div>
-              <DescriptionIcon className="text-4xl text-white/80" />
+              <DescriptionIcon className="text-4xl text-white opacity-75" />
             </div>
           </CardBody>
         </Card>
       </div>
 
       {/* Detailed Stats */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid lg:grid-cols-2 gap-6">
         <Card className="h-full">
           <CardBody>
             <h3 className="text-xl font-bold text-neutral-darkBlue mb-4">Shipment Status</h3>

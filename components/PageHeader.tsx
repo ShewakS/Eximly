@@ -24,20 +24,23 @@ export default function PageHeader({
   align = 'center',
   className = '',
 }: PageHeaderProps) {
-  const alignment = align === 'center' ? 'text-center mx-auto' : 'text-left';
+  const isCentered = align === 'center';
+  const alignClass = isCentered ? 'page-header-centered' : 'page-header-left';
 
   return (
-    <div className={`max-w-2xl mb-12 ${alignment} ${className}`}>
+    <div className={`page-header ${alignClass} ${className}`}>
       {eyebrow && (
-        <span className="text-ocean-sky font-bold tracking-wider text-xs uppercase mb-3 block">
+        <span className="page-header-eyebrow font-bold tracking-wider text-xs uppercase block mb-3">
           {eyebrow}
         </span>
       )}
-      <h1 className="text-4xl md:text-5xl font-extrabold text-neutral-darkBlue leading-tight mb-4">
+      <h1 className="page-header-title font-extrabold leading-tight mb-4">
         {title}
       </h1>
       {subtitle && (
-        <p className="text-neutral-gray text-base leading-relaxed">{subtitle}</p>
+        <p className="page-header-subtitle text-base leading-relaxed">
+          {subtitle}
+        </p>
       )}
     </div>
   );

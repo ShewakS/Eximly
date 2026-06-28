@@ -9,13 +9,13 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   const isAdmin = pathname?.startsWith('/admin') || false;
 
   return (
-    <div className="min-h-full flex flex-col bg-neutral-lightGray">
+    <div className="layout-shell">
       {!isAdmin && <Navbar />}
       <main className="flex-1">{children}</main>
       {!isAdmin && (
-        <footer className="bg-neutral-footer text-white py-12 border-t border-white/10 mt-auto">
+        <footer className="footer-container">
           <div className="container-max px-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="footer-grid">
               <div>
                 <h3 className="text-xl font-bold mb-4 text-ocean-sky">Eximly</h3>
                 <p className="text-neutral-gray text-sm leading-relaxed">
@@ -48,7 +48,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
                 <p className="text-neutral-gray text-sm mt-1">Phone: +1-800-EXIMLY</p>
               </div>
             </div>
-            <div className="border-t border-white/5 mt-10 pt-8 text-center text-neutral-gray text-xs">
+            <div className="border-separator text-center text-neutral-gray text-xs">
               <p>&copy; {new Date().getFullYear()} Eximly. All rights reserved.</p>
             </div>
           </div>

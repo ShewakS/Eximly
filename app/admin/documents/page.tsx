@@ -146,15 +146,13 @@ export default function DocumentVerification() {
                       </div>
                     </td>
                     <td className="py-3 px-4">
-                      <span
-                        className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                          doc.status === 'verified'
-                            ? 'bg-status-success text-white'
-                            : doc.status === 'rejected'
-                            ? 'bg-status-danger text-white'
-                            : 'bg-status-warning text-gray-900'
-                        }`}
-                      >
+                      <span className={`badge ${
+                        doc.status === 'verified'
+                          ? 'badge-delivered'
+                          : doc.status === 'rejected'
+                          ? 'badge-rejected'
+                          : 'badge-pending'
+                      }`}>
                         {doc.status}
                       </span>
                     </td>
