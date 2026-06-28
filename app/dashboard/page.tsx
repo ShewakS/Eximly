@@ -15,7 +15,25 @@ interface Shipment {
   quantity: number;
   exportType: string;
   status: string;
+  documentVerificationStatus?: string;
+  sourceCountry?: string;
+  destinationCountry?: string;
   createdAt: string;
+}
+
+function statusBadgeClass(status: string) {
+  switch (status) {
+    case 'delivered': return 'badge-delivered-soft';
+    case 'in_transit': return 'badge-transit-soft';
+    case 'pending_review': return 'badge-transit-soft';
+    case 'documents_rejected': return 'badge-rejected';
+    case 'draft': return 'badge-pending-soft';
+    default: return 'badge-pending-soft';
+  }
+}
+
+function formatStatus(status: string) {
+  return status.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
 export default function DashboardPage() {
@@ -152,13 +170,15 @@ export default function DashboardPage() {
                         </span>
                       </td>
                       <td className="py-3 px-4">
-                        <span className={`badge ${
-                          shipment.status === 'delivered' ? 'badge-delivered-soft'
-                            : shipment.status === 'in_transit' ? 'badge-transit-soft'
-                            : 'badge-pending-soft'
-                        }`}>
-                          {shipment.status.replace('_', ' ').charAt(0).toUpperCase() + shipment.status.replace('_', ' ').slice(1)}
+                        <span className={`badge ${statusBadgeClass(shipment.status)}`}>
+                          {formatStatus(shipment.status)}
                         </span>
+                        {shipment.documentVerificationStatus === 'pending' && (
+                          <span className="badge badge-pending-soft ml-1">Docs Pending</span>
+                        )}
+                        {shipment.documentVerificationStatus === 'rejected' && (
+                          <span className="badge badge-rejected ml-1">Docs Rejected</span>
+                        )}
                       </td>
                       <td className="py-3 px-4 text-sm text-neutral-gray">
                         {new Date(shipment.createdAt).toLocaleDateString()}

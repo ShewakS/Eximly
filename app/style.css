@@ -1657,4 +1657,193 @@ table {
 .progress-fill-w-95  { width: 95%; }
 .progress-fill-w-100 { width: 100%; }
 
+/* ─────────────────────────────────────────────
+   10. Shipment Wizard (Multi-step Export Form)
+───────────────────────────────────────────── */
+.wizard-container {
+  max-width: 56rem;
+  margin: 0 auto;
+}
+.wizard-card {
+  padding: 2rem 2.5rem;
+}
+.wizard-title {
+  font-size: 1.875rem;
+  font-weight: 800;
+  text-align: center;
+  color: var(--neutral-darkBlue);
+  margin-bottom: 0.5rem;
+}
+.wizard-subtitle {
+  text-align: center;
+  color: var(--neutral-gray);
+  font-size: 0.875rem;
+  margin-bottom: 2rem;
+}
+.wizard-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--neutral-light);
+}
+.wizard-step-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  background-color: var(--neutral-light);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--neutral-gray);
+  transition: all 0.2s;
+}
+.wizard-step-active {
+  background-color: var(--ocean-sky);
+  color: #ffffff;
+}
+.wizard-step-done {
+  background-color: rgba(33, 199, 183, 0.15);
+  color: var(--ocean-deep);
+}
+.wizard-step-num {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 9999px;
+  background-color: rgba(255,255,255,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.625rem;
+  font-weight: 800;
+}
+.wizard-step-active .wizard-step-num {
+  background-color: rgba(255,255,255,0.35);
+}
+.wizard-panel {
+  min-height: 16rem;
+}
+.wizard-panel-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--neutral-darkBlue);
+  margin-bottom: 0.5rem;
+}
+.wizard-type-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 640px) {
+  .wizard-type-options { grid-template-columns: 1fr; }
+}
+.wizard-type-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  padding: 1.25rem;
+  border: 2px solid var(--neutral-light);
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.wizard-type-card input { display: none; }
+.wizard-type-selected {
+  border-color: var(--ocean-sky);
+  box-shadow: 0 0 0 3px rgba(33, 199, 183, 0.15);
+}
+.wizard-type-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--neutral-darkBlue);
+}
+.wizard-type-desc {
+  font-size: 0.8125rem;
+  color: var(--neutral-gray);
+}
+.wizard-doc-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  padding: 1.25rem;
+  background-color: var(--neutral-lightGray);
+  border-radius: 0.75rem;
+  border: 1px solid var(--neutral-light);
+}
+@media (max-width: 640px) {
+  .wizard-doc-row { grid-template-columns: 1fr; }
+}
+.wizard-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--neutral-light);
+}
+
+/* — Review page — */
+.review-section {
+  padding: 1.25rem;
+  background-color: var(--neutral-lightGray);
+  border-radius: 0.75rem;
+  border: 1px solid var(--neutral-light);
+}
+.review-section-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--ocean-deep);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+@media (max-width: 640px) {
+  .review-grid { grid-template-columns: 1fr; }
+}
+.review-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+.review-item-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--neutral-gray);
+  font-weight: 600;
+}
+.review-item-value {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--neutral-darkBlue);
+}
+.review-costs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  background-color: var(--ocean-deep);
+  border-radius: 0.75rem;
+  color: #ffffff;
+}
+.review-cost-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+}
+.review-cost-item strong {
+  font-size: 1rem;
+}
+.review-cost-total {
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255,255,255,0.20);
+  font-weight: 700;
+}
 

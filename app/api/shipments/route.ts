@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { connectDB } from '@/lib/db';
 import Shipment from '@/lib/models/Shipment';
 import { verifyToken } from '@/lib/auth';
+import { buildShipmentPayload } from '@/lib/shipment-helpers';
 
 function getToken(req: Request): string | null {
   const auth = req.headers.get('Authorization') || req.headers.get('authorization');
@@ -38,34 +39,13 @@ export async function POST(req: Request) {
     if (!decoded) return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
 
     const body = await req.json();
-    const {
-      productName,
-      quantity,
-      exportType,
-      originCountry,
-      destinationCountry,
-      passportNumber,
-      customsDeclarationId,
-      exportLicenseNumber,
-      shippingMethod,
-    } = body;
 
-    if (!productName || !quantity || !exportType || !originCountry || !destinationCountry) {
-      return NextResponse.json({ error: 'Required fields are missing' }, { status: 400 });
+    if (!body.productName && !body.exportType) {
+      return NextResponse.json({ error: 'At least product name or export type is required' }, { status: 400 });
     }
 
-    const shipment = await Shipment.create({
-      userId: decoded.userId,
-      productName,
-      quantity,
-      exportType,
-      originCountry,
-      destinationCountry,
-      passportNumber: exportType === 'international' ? passportNumber : undefined,
-      customsDeclarationId: exportType === 'international' ? customsDeclarationId : undefined,
-      exportLicenseNumber: exportType === 'international' ? exportLicenseNumber : undefined,
-      shippingMethod: exportType === 'international' ? shippingMethod : undefined,
-    });
+    const payload = buildShipmentPayload(body, decoded.userId, 'draft');
+    const shipment = await Shipment.create(payload);
 
     return NextResponse.json({ shipment }, { status: 201 });
   } catch (error) {

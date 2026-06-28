@@ -12,6 +12,7 @@ interface Document {
   fileName: string;
   fileUrl: string;
   status: 'pending' | 'verified' | 'rejected';
+  rejectionReason?: string;
   uploadedAt: string;
   user: {
     firstName: string;
@@ -20,8 +21,12 @@ interface Document {
   };
   shipment: {
     exportType: string;
-    originCountry: string;
-    destinationCountry: string;
+    sourceCountry?: string;
+    destinationCountry?: string;
+    originCountry?: string;
+    productName?: string;
+    status?: string;
+    documentVerificationStatus?: string;
   };
   verifiedBy?: {
     firstName: string;
@@ -34,6 +39,7 @@ export default function DocumentVerification() {
   const [loading, setLoading] = useState(true);
   const [selectedDocument, setSelectedDocument] = useState<Document | null>(null);
   const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false);
+  const [rejectionReason, setRejectionReason] = useState('');
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
 
   useEffect(() => {
@@ -62,6 +68,11 @@ export default function DocumentVerification() {
   const handleVerifyDocument = async (status: 'verified' | 'rejected') => {
     if (!selectedDocument) return;
 
+    if (status === 'rejected' && !rejectionReason.trim()) {
+      setToast({ message: 'Please provide a rejection reason', type: 'error' });
+      return;
+    }
+
     try {
       const token = localStorage.getItem('token');
       const response = await fetch('/api/admin/documents', {
@@ -73,16 +84,24 @@ export default function DocumentVerification() {
         body: JSON.stringify({
           documentId: selectedDocument._id,
           status,
+          rejectionReason: status === 'rejected' ? rejectionReason : '',
         }),
       });
 
       if (response.ok) {
-        setToast({ message: `Document ${status} successfully`, type: 'success' });
+        setToast({
+          message: status === 'verified'
+            ? 'Document approved — shipment will proceed once all docs are verified'
+            : 'Document rejected — user will be notified to re-upload',
+          type: 'success',
+        });
         fetchDocuments();
         setIsVerifyModalOpen(false);
         setSelectedDocument(null);
+        setRejectionReason('');
       } else {
-        setToast({ message: 'Failed to verify document', type: 'error' });
+        const data = await response.json();
+        setToast({ message: data.error || 'Failed to verify document', type: 'error' });
       }
     } catch (error) {
       setToast({ message: 'Failed to verify document', type: 'error' });
@@ -142,7 +161,12 @@ export default function DocumentVerification() {
                     <td className="py-3 px-4 text-neutral-gray">
                       <div className="text-sm">
                         <div className="capitalize">{doc.shipment.exportType}</div>
-                        <div className="text-xs">{doc.shipment.originCountry} → {doc.shipment.destinationCountry}</div>
+                        <div className="text-xs">
+                          {doc.shipment.sourceCountry || doc.shipment.originCountry} → {doc.shipment.destinationCountry}
+                        </div>
+                        {doc.shipment.productName && (
+                          <div className="text-xs text-neutral-gray">{doc.shipment.productName}</div>
+                        )}
                       </div>
                     </td>
                     <td className="py-3 px-4">
@@ -173,7 +197,9 @@ export default function DocumentVerification() {
                       )}
                       {doc.status !== 'pending' && (
                         <span className="text-neutral-gray text-sm">
-                          Verified by {doc.verifiedBy?.firstName} {doc.verifiedBy?.lastName}
+                          {doc.status === 'rejected' && doc.rejectionReason
+                            ? `Rejected: ${doc.rejectionReason}`
+                            : `Verified by ${doc.verifiedBy?.firstName} ${doc.verifiedBy?.lastName}`}
                         </span>
                       )}
                     </td>
@@ -223,6 +249,16 @@ export default function DocumentVerification() {
               </a>
             </div>
           )}
+          <div>
+            <label className="auth-label">Rejection Reason (required if rejecting)</label>
+            <textarea
+              rows={3}
+              value={rejectionReason}
+              onChange={(e) => setRejectionReason(e.target.value)}
+              placeholder="Explain what needs to be corrected..."
+              className="resize-none"
+            />
+          </div>
           <div className="flex gap-3">
             <Button variant="success" onClick={() => handleVerifyDocument('verified')}>
               Approve
